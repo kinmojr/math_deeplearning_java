@@ -61,8 +61,11 @@ public class BinaryLogisticRegression {
     public void learn() {
         // 学習する
         for (int i = 0; i < iters; i++) {
+            // 予測値計算
             RealVector yp = sigmoid(dot(x, w));
+            // 誤差計算
             RealVector yd = yp.subtract(yt);
+            // 勾配計算
             w = sub(w, mult(div(dot(t(x), yd), M), alpha));
 
             // 一定回数学習するごとに誤差と精度を表示する

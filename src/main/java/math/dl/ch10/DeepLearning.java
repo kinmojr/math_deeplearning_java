@@ -74,11 +74,9 @@ public class DeepLearning {
             RealMatrix b1 = addBiasCol(b);
             RealMatrix u = dot(b1, W);
             RealMatrix yp = softmax(u);
-
             // 誤差計算
             RealMatrix yd = sub(yp, yt);
             RealMatrix bd = mult(step(a), dot(yd, t(removeBias(W))));
-
             // 勾配計算
             W = sub(W, mult(div(dot(t(b1), yd), batchSize), alpha));
             V = sub(V, mult(div(dot(t(x), bd), batchSize), alpha));

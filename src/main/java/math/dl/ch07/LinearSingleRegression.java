@@ -57,9 +57,11 @@ public class LinearSingleRegression {
      */
     public void learn() {
         for (int i = 0; i < iters; i++) {
-            // 重みを更新する
+            // 予測値計算
             RealVector yp = dot(x, w);
+            // 誤差計算
             RealVector yd = yp.subtract(yt);
+            // 勾配計算
             w = sub(w, mult(div(dot(t(x), yd), M), alpha));
 
             // 一定回数学習するごとに誤差を表示する
