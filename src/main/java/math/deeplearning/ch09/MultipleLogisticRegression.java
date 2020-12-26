@@ -1,11 +1,11 @@
-package math.dl.ch09;
+package math.deeplearning.ch09;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.IOException;
 
-import static math.dl.common.Util.*;
+import static math.deeplearning.common.Util.*;
 
 public class MultipleLogisticRegression {
     // 学習率

@@ -1,4 +1,4 @@
-package math.dl.common;
+package math.deeplearning.common;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;

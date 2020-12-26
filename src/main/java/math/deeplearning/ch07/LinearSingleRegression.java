@@ -1,4 +1,4 @@
-package math.dl.ch07;
+package math.deeplearning.ch07;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -6,12 +6,12 @@ import org.apache.commons.math3.linear.RealVector;
 
 import java.io.IOException;
 
-import static math.dl.common.Util.*;
+import static math.deeplearning.common.Util.*;
 
 /**
- * 線形重回帰モデル.
+ * 線形単回帰モデル.
  */
-public class LinearMultipleRegression {
+public class LinearSingleRegression {
     // 学習率
     private double alpha;
     // 学習回数
@@ -33,12 +33,12 @@ public class LinearMultipleRegression {
      * @param iters 学習回数
      * @param alpha 学習率
      */
-    public LinearMultipleRegression(int iters, double alpha) throws IOException {
+    public LinearSingleRegression(int iters, double alpha) throws IOException {
         this.iters = iters;
         this.alpha = alpha;
 
         RealMatrix boston = loadBoston();
-        x = addBiasCol(extractCol(boston, new int[]{5, 12}));
+        x = addBiasCol(extractCol(boston, new int[]{5}));
         yt = boston.getColumnVector(13);
         M = x.getRowDimension();
         D = x.getColumnDimension();
@@ -48,8 +48,8 @@ public class LinearMultipleRegression {
     }
 
     public static void main(String[] args) throws Exception {
-        LinearMultipleRegression lmr = new LinearMultipleRegression(2000, 0.001);
-        lmr.learn();
+        LinearSingleRegression lsr = new LinearSingleRegression(50000, 0.01);
+        lsr.learn();
     }
 
     /**
