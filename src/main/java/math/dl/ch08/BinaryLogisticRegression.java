@@ -70,8 +70,9 @@ public class BinaryLogisticRegression {
 
             // 一定回数学習するごとに誤差と精度を表示する
             if (i % 10 == 0) {
-                System.out.print("iter = " + i + "\tloss = " + crossEntropy(ytTest, sigmoid(dot(xTest, w))));
-                System.out.println("\tscore = " + calcAccuracy(ytTest, sigmoid(dot(xTest, w))));
+                RealVector p = sigmoid(dot(xTest, w));
+                System.out.print("iter = " + i + "\tloss = " + crossEntropy(ytTest, p));
+                System.out.println("\tscore = " + calcAccuracy(ytTest, p));
             }
         }
     }

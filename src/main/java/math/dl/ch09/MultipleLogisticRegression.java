@@ -30,8 +30,8 @@ public class MultipleLogisticRegression {
     /**
      * 初期化処理.
      *
-     * @param iters    学習回数
-     * @param alpha    学習率
+     * @param iters 学習回数
+     * @param alpha 学習率
      */
     public MultipleLogisticRegression(int iters, double alpha) throws IOException {
         this.iters = iters;
@@ -71,8 +71,9 @@ public class MultipleLogisticRegression {
 
             // 一定回数学習するごとに誤差と精度を表示する
             if (i % 10 == 0) {
-                System.out.print("iter = " + i + "\tloss = " + crossEntropy(ytTest, softmax(dot(xTest, W))));
-                System.out.println("\tscore = " + calcAccuracy(ytTest, softmax(dot(xTest, W))));
+                RealMatrix p = softmax(dot(xTest, W));
+                System.out.print("iter = " + i + "\tloss = " + crossEntropy(ytTest, p));
+                System.out.println("\tscore = " + calcAccuracy(ytTest, p));
             }
         }
     }
