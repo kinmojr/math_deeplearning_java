@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import static math.deeplearning.common.Util.*;
 
+/**
+ * 2クラスロジスティック回帰モデル.
+ */
 public class BinaryLogisticRegression {
     // 学習率
     private double alpha;

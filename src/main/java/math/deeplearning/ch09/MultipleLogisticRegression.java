@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import static math.deeplearning.common.Util.*;
 
+/**
+ * 多クラスロジスティック回帰モデル.
+ */
 public class MultipleLogisticRegression {
     // 学習率
     private double alpha;

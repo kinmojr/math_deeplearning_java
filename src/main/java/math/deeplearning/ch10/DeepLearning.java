@@ -8,6 +8,9 @@ import java.util.List;
 
 import static math.deeplearning.common.Util.*;
 
+/**
+ * ディープラーニング(隠れ層1層).
+ */
 public class DeepLearning {
     // 学習データの行数
     private int M;
