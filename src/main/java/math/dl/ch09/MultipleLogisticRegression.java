@@ -65,7 +65,7 @@ public class MultipleLogisticRegression {
             // 予測値計算
             RealMatrix yp = softmax(dot(x, W));
             // 誤差計算
-            RealMatrix yd = yp.subtract(yt);
+            RealMatrix yd = sub(yp, yt);
             // 勾配計算
             W = sub(W, mult(div(dot(t(x), yd), M), alpha));
 

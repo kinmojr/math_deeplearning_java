@@ -60,7 +60,7 @@ public class LinearMultipleRegression {
             // 予測値計算
             RealVector yp = dot(x, w);
             // 誤差計算
-            RealVector yd = yp.subtract(yt);
+            RealVector yd = sub(yp, yt);
             // 勾配計算
             w = sub(w, mult(div(dot(t(x), yd), M), alpha));
 
