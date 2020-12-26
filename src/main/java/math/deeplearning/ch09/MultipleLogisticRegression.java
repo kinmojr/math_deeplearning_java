@@ -38,12 +38,14 @@ public class MultipleLogisticRegression {
         this.alpha = alpha;
 
         RealMatrix iris = shuffle(loadIris());
+        // sepal lengthとpetal lengthの2変数を使う場合
         x = addBiasCol(extractRowCol(iris, 0, 74, new int[]{0, 2}));
         xTest = addBiasCol(extractRowCol(iris, 75, 149, new int[]{0, 2}));
+        // 4変数すべてを使う場合
         // x = addBiasCol(extractRowCol(iris, 0, 74, 0, 3));
         // xTest = addBiasCol(extractRowCol(iris, 75, 149, 0, 3));
-        yt = oneHotEncode(iris.getColumnVector(4).getSubVector(0, 75), 3);
-        ytTest = oneHotEncode(iris.getColumnVector(4).getSubVector(75, 75), 3);
+        yt = oneHotEncode(extractRowCol(iris, 0, 74, 4), 3);
+        ytTest = oneHotEncode(extractRowCol(iris, 75, 149, 4), 3);
         M = x.getRowDimension();
         D = x.getColumnDimension();
 
