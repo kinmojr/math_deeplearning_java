@@ -1,11 +1,8 @@
 package math.deeplearning.ch10;
 
 import org.apache.commons.math3.linear.RealMatrix;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import static math.deeplearning.common.Util.*;
 
 /**
@@ -58,7 +55,9 @@ public class DeepLearning2 {
     }
 
     public static void main(String... args) throws Exception {
+        // 学習回数を10000、隠れ層のニューロン数を128、バッチサイズを512、学習率を0.01に設定する
         DeepLearning2 dl2 = new DeepLearning2(10000, 128, 512, 0.01);
+        // 学習する
         dl2.learn();
     }
 
@@ -68,12 +67,12 @@ public class DeepLearning2 {
         for (int i = 0; i < M; i++) indexes.add(i);
 
         for (int i = 0; i < iters; i++) {
-            // 学習データのサンプリング
+            // 学習データをサンプリング
             List<Integer> index = randIndex(indexes, M, batchSize);
             RealMatrix x = sampling(xAll, index);
             RealMatrix yt = sampling(ytAll, index);
 
-            // 予測値計算
+            // 各層の出力値を計算
             RealMatrix a = dot(x, U);
             RealMatrix b = reLU(a);
             RealMatrix b1 = addBiasCol(b);
@@ -82,14 +81,14 @@ public class DeepLearning2 {
             RealMatrix d1 = addBiasCol(d);
             RealMatrix u = dot(d1, W);
             RealMatrix yp = softmax(u);
-            // 誤差計算
+            // 各層の誤差を計算
             RealMatrix yd = sub(yp, yt);
-            RealMatrix dd = mult(step(c), dot(yd, t(removeBias(W))));
-            RealMatrix bd = mult(step(a), dot(dd, t(removeBias(V))));
-            // 勾配計算
-            W = sub(W, mult(div(dot(t(d1), yd), batchSize), alpha));
-            V = sub(V, mult(div(dot(t(b1), dd), batchSize), alpha));
-            U = sub(U, mult(div(dot(t(x), bd), batchSize), alpha));
+            RealMatrix dd = mult(step(c), dot(yd, trans(removeBias(W))));
+            RealMatrix bd = mult(step(a), dot(dd, trans(removeBias(V))));
+            // 勾配に学習率を掛けて各層の重みを更新
+            W = sub(W, mult(div(dot(trans(d1), yd), batchSize), alpha));
+            V = sub(V, mult(div(dot(trans(b1), dd), batchSize), alpha));
+            U = sub(U, mult(div(dot(trans(x), bd), batchSize), alpha));
 
             // 一定回数学習するごとに誤差と精度を表示
             if (i % 100 == 0) {

@@ -1,11 +1,8 @@
 package math.deeplearning.ch10;
 
 import org.apache.commons.math3.linear.RealMatrix;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import static math.deeplearning.common.Util.*;
 
 /**
@@ -56,7 +53,9 @@ public class DeepLearning {
     }
 
     public static void main(String... args) throws Exception {
+        // 学習回数を10000、隠れ層のニューロン数を128、バッチサイズを512、学習率を0.01に設定する
         DeepLearning dl = new DeepLearning(10000, 128, 512, 0.01);
+        // 学習する
         dl.learn();
     }
 
@@ -66,25 +65,25 @@ public class DeepLearning {
         for (int i = 0; i < M; i++) indexes.add(i);
 
         for (int i = 0; i < iters; i++) {
-            // 学習データのサンプリング
+            // 学習データをサンプリング
             List<Integer> index = randIndex(indexes, M, batchSize);
             RealMatrix x = sampling(xAll, index);
             RealMatrix yt = sampling(ytAll, index);
 
-            // 予測値計算
+            // 各層の出力値を計算
             RealMatrix a = dot(x, V);
             RealMatrix b = reLU(a);
             RealMatrix b1 = addBiasCol(b);
             RealMatrix u = dot(b1, W);
             RealMatrix yp = softmax(u);
-            // 誤差計算
+            // 各層の誤差を計算
             RealMatrix yd = sub(yp, yt);
-            RealMatrix bd = mult(step(a), dot(yd, t(removeBias(W))));
-            // 勾配計算
-            W = sub(W, mult(div(dot(t(b1), yd), batchSize), alpha));
-            V = sub(V, mult(div(dot(t(x), bd), batchSize), alpha));
+            RealMatrix bd = mult(step(a), dot(yd, trans(removeBias(W))));
+            // 勾配に学習率を掛けて各層の重みを更新
+            W = sub(W, mult(div(dot(trans(b1), yd), batchSize), alpha));
+            V = sub(V, mult(div(dot(trans(x), bd), batchSize), alpha));
 
-            // 一定回数学習するごとに誤差と精度を表示する
+            // 一定回数学習するごとに誤差と精度を表示
             if (i % 100 == 0) {
                 RealMatrix p = softmax(dot(addBiasCol(reLU(dot(xTest, V))), W));
                 System.out.print(i + " " + crossEntropy(ytTest, p) + " ");

@@ -1,15 +1,9 @@
 package math.deeplearning.common;
 
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.RealVector;
-
+import org.apache.commons.math3.linear.*;
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.net.*;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 public class Util {
@@ -108,7 +102,7 @@ public class Util {
         return MatrixUtils.createRealVector(pA);
     }
 
-    public static RealMatrix t(RealMatrix aM) {
+    public static RealMatrix trans(RealMatrix aM) {
         return aM.transpose();
     }
 
