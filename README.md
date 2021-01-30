@@ -6,3 +6,5 @@
 (行列やベクトルの演算部分はcommons mathを利用しています)
 
 書籍の内容に合わせたので、Javaっぽくない書き方や冗長になっている部分があります。
+
+Qiitaの[解説記事](https://qiita.com/kinmojr/items/6d12f6084bbd1203a0db)も参考にしてください。
